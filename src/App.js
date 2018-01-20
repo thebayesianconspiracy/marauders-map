@@ -3,20 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import ba from 'blockapps-rest-mod';
 
-const { util, config, Promise, rest } = ba;
+import utils from './Utils.js'
 
-function* createUser(username, password) {
-  const admin = yield rest.createUser(username, password);
-  const constract = yield rest.uploadContract(admin);
-}
+const { util, config, Promise, rest } = ba;
 
 class App extends Component {
 
   componentDidMount() {
-    const a = createUser('soumeeeeee', 'lolololol');
-    window.a = a;
+    window.a = utils.start();
   }
-  
+
   render() {
     return (
       <div className="App">
