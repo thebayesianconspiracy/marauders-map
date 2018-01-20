@@ -1,5 +1,6 @@
 import ba from 'blockapps-rest-mod';
-const { util, config, Promise, rest } = ba;
+const { rest, common } = ba;
+const { util, config, Promise } = common;
 
 const obj = {};
 
