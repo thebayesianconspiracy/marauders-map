@@ -1,19 +1,12 @@
 import ba from 'blockapps-rest-mod';
 const { rest, common } = ba;
 const { util, config, Promise } = common;
+const co = require('co');
 
-function* start() {
-  const admin = yield rest.createUser('fernandes', 'lololotrol').next();
-  const createFucker = 'Ffucker';
-  const args = {
-    _account: 'ABC',
-    _username: 'vivek',
-    _dicksize: 6,
-    _pwHash: 'hash',
-    _id: 1
-  };
-
-  yield rest.callMethod(admin,'Ffucker', createFucker, args).next();
+async function start() {
+  const admin = rest.createUser('fernandes', 'lololotrol');
+  const value = await co(admin);
+  console.log('value is', value);
 }
 
 export default {

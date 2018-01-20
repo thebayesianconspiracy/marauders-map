@@ -11,9 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    for (let n of utils.start()) {
-      console.log('n is', n);
-    }
+    utils.start();
   }
 
   render() {
