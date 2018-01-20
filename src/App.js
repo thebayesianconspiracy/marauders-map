@@ -5,7 +5,18 @@ import ba from 'blockapps-rest';
 
 const { util, config, Promise, rest } = ba;
 
+function* createUser(username, password) {
+  const admin = yield rest.createUser(username, password);
+  const constract = yield rest.uploadContract(admin);
+}
+
 class App extends Component {
+
+  componentDidMount() {
+    const a = createUser('soumeeeeee', 'lolololol');
+    window.a = a;
+  }
+  
   render() {
     return (
       <div className="App">
