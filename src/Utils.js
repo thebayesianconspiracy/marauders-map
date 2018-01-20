@@ -4,7 +4,7 @@ const { util, config, Promise } = common;
 const co = require('co');
 
 async function start() {
-  const admin = rest.createUser('fernandes', 'lololotrol');
+  const admin = rest.createUser('abc', 'abc');
   const value = await co(admin);
   console.log('value is', value);
   const set = 'set';
@@ -12,14 +12,13 @@ async function start() {
     x: 22
   };
   const contractName = 'SimpleStorage';
-  console.log('Admin is', value);
-  const contractAddress = await co(rest.isCompiled(contractName));
+  const contractAddress = await co(rest.query(contractName));
   const contract = {
     name: contractName,
-    address: contractAddress
+    address: contractAddress[0]
   }
-  /* const caller = await co(rest.callMethod(value, contract, set, args));*/
-  console.log('contract is ', contract);
+  const fillUser = await co(rest.fillUser(value.name, value.address));
+  const caller = await co(rest.callMethod(value, contract, set, args));
 }
 
 export default {
