@@ -9,11 +9,17 @@ async function start() {
   console.log('value is', value);
   const set = 'set';
   const args = {
-    storedData: '22'
+    x: 22
   };
+  const contractName = 'SimpleStorage';
   console.log('Admin is', value);
-  const caller = await co(rest.callMethod(value,'SimpleStorage', set, args));
-  console.log('Caller is', caller);
+  const contractAddress = await co(rest.isCompiled(contractName));
+  const contract = {
+    name: contractName,
+    address: contractAddress
+  }
+  /* const caller = await co(rest.callMethod(value, contract, set, args));*/
+  console.log('contract is ', contract);
 }
 
 export default {

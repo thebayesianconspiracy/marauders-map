@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "blockapps-rest": "^3.1.2",
-    "blockapps-rest-mod": "^3.1.4",
+    "blockapps-rest-mod": "^3.1.5",
     "chai": "^4.1.2",
     "co": "^4.6.0",
     "react": "^16.2.0",
