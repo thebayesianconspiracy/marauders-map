@@ -3,7 +3,7 @@ const { rest, common } = ba;
 const { util, config, Promise } = common;
 
 function* start() {
-  const admin = rest.createUser('fernandes', 'lololotrol').next();
+  const admin = yield rest.createUser('fernandes', 'lololotrol').next();
   const createFucker = 'Ffucker';
   const args = {
     _account: 'ABC',
