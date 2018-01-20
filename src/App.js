@@ -9,8 +9,11 @@ const { util, config, Promise, rest } = ba;
 
 class App extends Component {
 
-  componentDidMount() {
-    window.a = utils.start();
+  constructor(props) {
+    super(props);
+    for (let n of utils.start()) {
+      console.log('n is', n);
+    }
   }
 
   render() {

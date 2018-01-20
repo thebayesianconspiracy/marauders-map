@@ -2,14 +2,8 @@ import ba from 'blockapps-rest-mod';
 const { rest, common } = ba;
 const { util, config, Promise } = common;
 
-const obj = {};
-
-obj.createUser = function*(username, password) {
-  yield rest.createUser(username, password);
-}
-
-obj.createFucker = function*(admin) {
-  rest.verbose('createFucker');
+function* start() {
+  const admin = rest.createUser('fernandes', 'lololotrol').next();
   const createFucker = 'Ffucker';
   const args = {
     _account: 'ABC',
@@ -19,14 +13,9 @@ obj.createFucker = function*(admin) {
     _id: 1
   };
 
-  yield rest.callMethod(admin,'Ffucker', obj.createFucker, args);
+  yield rest.callMethod(admin,'Ffucker', createFucker, args).next();
 }
 
-obj.start = function* () {
-  const admin = yield obj.createUser('fernandes', 'lololotrol');
-  console.log('Admin is', admin);
-  const result = yield obj.createFucker(admin);
-  console.log('Result is', result);
-}
-
-export default obj;
+export default {
+  start
+};
