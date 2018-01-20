@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ba from 'blockapps-rest-mod';
 
 import utils from './Utils.js'
-
-const { util, config, Promise, rest } = ba;
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    utils.start();
   }
 
   render() {

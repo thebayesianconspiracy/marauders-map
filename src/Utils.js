@@ -3,24 +3,24 @@ const { rest, common } = ba;
 const { util, config, Promise } = common;
 const co = require('co');
 
-async function start() {
-  const admin = rest.createUser('abc', 'abc');
+async function signUp(name, password) {
+  const admin = rest.createUser(name, password);
   const value = await co(admin);
-  console.log('value is', value);
-  const set = 'set';
-  const args = {
-    x: 22
-  };
-  const contractName = 'SimpleStorage';
-  const contractAddress = await co(rest.query(contractName));
+  const fillUser = await co(rest.fillUser(value.name, value.address));
+  return fillUser;
+}
+
+async function triggerContract(admin, name, method, args) {
+  const contractAddress = await co(rest.query(name));
   const contract = {
-    name: contractName,
+    name,
     address: contractAddress[0]
   }
-  const fillUser = await co(rest.fillUser(value.name, value.address));
-  const caller = await co(rest.callMethod(value, contract, set, args));
+  const caller = await co(rest.callMethod(admin, contract, method, args));
+  return contract;
 }
 
 export default {
-  start
+  signUp,
+  triggerContract
 };
