@@ -17,7 +17,7 @@ class Base extends React.Component {
       num: 2
     }));
   }
-  
+
   render() {
     const username = this.props.login.get('username');
     return (<div>Yoyo logged in {username}</div>);
