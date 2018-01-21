@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import _ from 'lodash';
 
+import utils from '../actions/utils';
+
 import { getLots } from '../actions/lots';
 
 const userinfo = {
@@ -42,14 +44,25 @@ class Base extends React.Component {
 
   componentDidMount() {
     const admin = this.props.login.get('admin');
+    const username = this.props.login.get('username');
     const address = admin.address;
     this.props.dispatch(getLots(address));
+    this.props.dispatch(utils.getUserInfo(username));
   }
   
   render() {
-    const username = this.props.login.get('username');
+    const userInfo = this.props.login.get('data') || {};
     const lots = this.props.lots.get('lots');
-    console.log('lots are', lots);
+    const userDiv = _.isEmpty(userInfo) ? null : (
+      <div style={userinfo}>
+        <pre>
+          Welcome back, {JSON.stringify(userInfo)}
+          Farmer Type, {userInfo.entityType}
+        </pre>
+      </div>
+    );
+    
+    
     const lotData = _.map(lots, lot => (
       <div>
         Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}
@@ -58,9 +71,7 @@ class Base extends React.Component {
     return (
       <div style={rootStyle}>
         <div style={{nav}}>
-          <div style={userinfo}>
-              Welcome back, {username}
-          </div>
+          {userDiv}
         </div>
         <Link style={{display: 'block'}} to="/addlots">Add lots</Link>
         <div style={lotRoot}>

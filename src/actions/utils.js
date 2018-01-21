@@ -29,8 +29,24 @@ async function triggerContract(admin, name, method, args) {
   return contract;
 }
 
+function getUserInfo(username) {
+  return async function(dispatch, getState) {
+    try {
+      const userInfos = await search("Entity2?entityName=eq." + username);
+      const data = _.first(userInfos);
+      dispatch({
+        type: 'ADD_USER_INFO',
+        payload: { data },
+      });
+    } catch(e) {
+      console.log('Error logging in is', e);
+    }
+  }
+}
+
 export default {
   signUp,
   triggerContract,
-  search
+  search,
+  getUserInfo
 };
