@@ -5,10 +5,27 @@ import _ from 'lodash';
 
 import { addLots } from '../actions/lots';
 
-const styles = {
-  form: {
-    
-  }
+const formRoot = {
+  'flex-direction': "row",
+  'justify-content': "center",
+  'align-items': "center",
+  display: "flex"
+};
+
+const inputStyle = {
+  width: '340px',
+  height: '30px',
+  'border-radius': '6px',
+  margin: '8px',
+  'font-size': '18px'
+};
+
+const form = {
+  'border-width': 1,
+  'flex-direction': "column",
+  'justify-content': "center",
+  'align-items': "center",
+  display: "flex"
 };
 
 class Base extends React.Component {
@@ -40,16 +57,18 @@ class Base extends React.Component {
   
   render() {
     return (
-      <LocalForm
-          style={[styles.form]}
-          onUpdate={(form) => this.handleUpdate(form)}
-          onChange={(values) => this.handleChange(values)}
-          onSubmit={(values) => this.handleSubmit(values)}
-      >
-        <Control.text placeholder="location" model=".location" />
-        <Control.text placeholder="number" model=".num" />
-        <button>Submit!</button>
-      </LocalForm>
+      <div style={formRoot}>
+        <LocalForm
+            style={form}
+            onUpdate={(form) => this.handleUpdate(form)}
+            onChange={(values) => this.handleChange(values)}
+            onSubmit={(values) => this.handleSubmit(values)}
+        >
+          <Control.text style={inputStyle} placeholder="location" model=".location" />
+          <Control.text style={inputStyle} placeholder="number" model=".num" />
+          <button style={inputStyle}>Submit!</button>
+        </LocalForm>
+      </div>
     )
   }
 }

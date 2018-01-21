@@ -12,6 +12,29 @@ function isLoggedIn() {
   return !_.isEmpty(username);
 }
 
+const formRoot = {
+  'flex-direction': "row",
+  'justify-content': "center",
+  'align-items': "center",
+  display: "flex"
+};
+
+const inputStyle = {
+  width: '340px',
+  height: '30px',
+  'border-radius': '6px',
+  margin: '8px',
+  'font-size': '18px'
+};
+
+const form = {
+  'border-width': 1,
+  'flex-direction': "column",
+  'justify-content': "center",
+  'align-items': "center",
+  display: "flex"
+};
+
 
 class Signup extends React.Component {
   
@@ -45,26 +68,22 @@ class Signup extends React.Component {
   
   render() {
     return (
-      <LocalForm
-          style={[styles.form]}
-          onUpdate={(form) => this.handleUpdate(form)}
-          onChange={(values) => this.handleChange(values)}
-          onSubmit={(values) => this.handleSubmit(values)}
-      >
-        <Control.text placeholder="username" model=".username" />
-        <Control.text placeholder="password" model=".password" />
-        <Control.text placeholder="entityType" defaultValue="Farmer" model=".entityType" />
-        <Control.text placeholder="farmerType" defaultValue="Organic" model=".farmerType" />
-        <button>Submit!</button>
-      </LocalForm>
+      <div style={formRoot}>
+        <LocalForm
+            style={form}
+            onUpdate={(form) => this.handleUpdate(form)}
+            onChange={(values) => this.handleChange(values)}
+            onSubmit={(values) => this.handleSubmit(values)}
+        >
+          <Control.text style={inputStyle} placeholder="username" model=".username" />
+          <Control.text style={inputStyle} placeholder="password" model=".password" />
+          <Control.text style={inputStyle} placeholder="entityType" defaultValue="Farmer" model=".entityType" />
+          <Control.text style={inputStyle} placeholder="farmerType" defaultValue="Organic" model=".farmerType" />
+          <button style={inputStyle} >Submit!</button>
+        </LocalForm>
+      </div>
     );
   }
 }
-
-const styles = {
-  form: {
-    
-  }
-};
 
 export default connect()(Signup);
