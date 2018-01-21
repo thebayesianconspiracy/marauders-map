@@ -14,7 +14,7 @@ export function addBid(lotAddresses, amount) {
         lotAddresses,
         amount
       };
-      console.log('args are', args);
+      console.log('add bids args are', args);
       const promise = await utils.triggerContract(admin, 'LotManager', 'createBid', args);
       console.log('contract is', promise);
     } catch(e) {
@@ -28,7 +28,8 @@ export function addBid(lotAddresses, amount) {
 export function getBids(query) {
   return async function (dispatch, getState) {
     try {
-      const bids = await utils.search("Bid?ownerAddress=eq." + query);
+      const bids = await utils.search("Bid?creatorAddress=eq." + query);
+      console.log('received bids', bids);
       dispatch({
         type: 'ADD_BIDS',
         payload: { bids },

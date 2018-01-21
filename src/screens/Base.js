@@ -6,6 +6,8 @@ import _ from 'lodash';
 import utils from '../actions/utils';
 
 import { getLots } from '../actions/lots';
+import { getBids } from '../actions/bids';
+
 
 const userinfoStyle = {
   'text-align' : 'left',
@@ -57,12 +59,15 @@ class Base extends React.Component {
     const username = this.props.login.get('username');
     const address = admin.address;
     this.props.dispatch(getLots(address));
+    this.props.dispatch(getBids(address));
     this.props.dispatch(utils.getUserInfo(username));
   }
 
   render() {
     const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
+    const bids = this.props.login.get('bids') || [];
+    console.log('bids are', bids);
     const textStyle = {
       position: 'relative',
       top: '15px',
@@ -93,7 +98,7 @@ class Base extends React.Component {
       <div>
           <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
           <a style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
-          <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/Add Bids">Add bids</Link>
+          <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
         </div>
         <div style={{nav}}>
           {userDiv}
