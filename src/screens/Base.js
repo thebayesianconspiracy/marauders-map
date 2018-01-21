@@ -86,7 +86,6 @@ class Base extends React.Component {
             {lotData}
           </div>
           <div style={Object.assign({}, userinfoStyle)}>
-          <Link style={{display: 'block'}} to="/addbids">Add Bids</Link>
           </div>
         </div>
       </div>
