@@ -63,13 +63,18 @@ class Base extends React.Component {
   render() {
     const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
+    const textStyle = {
+      position: 'relative',
+      top: '15px',
+      fontSize : '25px'
+    };
+    const imgSize = 150;
     const userDiv = _.isEmpty(userInfo) ? null : (
       <div style={userinfoStyle}>
         <pre>
-          <div style={{flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column'}}>
-            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> Welcome back, {userInfo.entityName}</div> <br/>
-            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> <span>Entity type,</span> <img height="50" width="50" src={entityTypeImages[userInfo.entityType]} /> </div> <br/>
-            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> <span>Farmer Type,</span> <img height="50" width="50" src={farmerTypeImages[userInfo.farmerType]} /></div>
+          <div style={{flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column'}}> <br/>
+            <div style={{position:'absolute',top:200,right:250}}> <p style={textStyle}>Entity type</p> <img height={imgSize} width={imgSize} src={entityTypeImages[userInfo.entityType]} /> </div> <br/>
+            <div style={{position:'absolute',top:200,right:20}}> <p style={textStyle}>Farmer Type </p> <img height={imgSize} width={imgSize} src={farmerTypeImages[userInfo.farmerType]} /></div>
           </div>
         </pre>
       </div>
@@ -84,6 +89,8 @@ class Base extends React.Component {
     return (
       <div style={rootStyle}>
         <div style={{textAlign: 'right', marginRight: '10px'}}>
+          Welcome back, {userInfo.entityName}</div>
+      <div>
           <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
           <a style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
           <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/Add Bids">Add bids</Link>
