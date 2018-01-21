@@ -27,6 +27,8 @@ class Signup extends React.Component {
       >
         <Control.text placeholder="username" model=".username" />
         <Control.text placeholder="password" model=".password" />
+        <Control.text placeholder="entityType" defaultValue="Farmer" model=".entityType" />
+        <Control.text placeholder="farmerType" defaultValue="Organic" model=".farmerType" />
         <button>Submit!</button>
       </LocalForm>
     );
