@@ -7,6 +7,8 @@ import history from '../history';
 import Signup from './Signup';
 import Base from './Base';
 import LotAdd from './LotAdd';
+import BidAdd from './BidAdd';
+
 import { Router, Route, browserHistory, Link } from 'react-router';
 
 function isLoggedIn() {
@@ -23,7 +25,7 @@ class EnsureLoggedInContainer extends React.Component {
       browserHistory.replace("/login")
     }
   }
-  
+
   componentWillReceiveProps() {
 
     if (!isLoggedIn()) {
@@ -49,7 +51,7 @@ export default class Root extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
 
     return (
@@ -58,6 +60,8 @@ export default class Root extends React.Component {
         <Route component={EnsureLoggedInContainer}>
           <Route path="/" component={Base} />
           <Route path="/addlots" component={LotAdd} />
+          <Route path="/addbids" component={BidAdd} />
+
         </Route>
       </Router>
     );

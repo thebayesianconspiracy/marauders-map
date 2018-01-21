@@ -51,7 +51,7 @@ class Base extends React.Component {
     this.props.dispatch(getLots(address));
     this.props.dispatch(utils.getUserInfo(username));
   }
-  
+
   render() {
     const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
@@ -63,8 +63,8 @@ class Base extends React.Component {
         </pre>
       </div>
     );
-    
-    
+
+
     const lotData = _.map(lots, lot => (
       <div>
         Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}
@@ -85,7 +85,8 @@ class Base extends React.Component {
           <div style={lotDataStyle}>
             {lotData}
           </div>
-          <div style={Object.assign({}, userinfoStyle)}>
+          <div style={Object.assign({}, userinfo)}>
+          <Link style={{display: 'block'}} to="/addbids">Add Bids</Link>
           </div>
         </div>
       </div>

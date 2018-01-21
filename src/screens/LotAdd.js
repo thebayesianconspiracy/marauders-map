@@ -54,7 +54,7 @@ class Base extends React.Component {
 
   componentDidMount() {
   }
-  
+
   render() {
     return (
       <div style={formRoot}>

@@ -24,6 +24,7 @@ const initialState = Immutable.Map({
 export const REDUCERS = {
   LOGIN: (state, { username, password, admin }) => state.merge({ username, password, admin }),
   ADD_USER_INFO: (state, data) => state.merge(data),
+  ADD_BID_INFO: (state, data) => state.merge(data),
 };
 
 //////////////////////////
