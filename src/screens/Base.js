@@ -41,11 +41,11 @@ const nav = {
 }
 
 const entityTypeImages = {
-  1: "https://image.ibb.co/etf28b/organic.png",
+  1: "https://image.ibb.co/j7UvTb/farmer1.png",
 }
 
 const farmerTypeImages = {
-  1: "https://image.ibb.co/j7UvTb/farmer1.png",
+  1: "https://image.ibb.co/etf28b/organic.png",
 }
 
 class Base extends React.Component {
