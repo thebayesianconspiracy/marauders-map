@@ -38,6 +38,14 @@ const nav = {
   'background' : '#27ae60'
 }
 
+const entityTypeImages = {
+  1: "https://lh4.googleusercontent.com/Gq4YdQzTGszaJUj7SPpJbwKtb_azZAdDag8lCud1t1ymQCSVflIlKYgfON4LJn1auiRkRT2iWZzZaMq4Jleq=w3360-h1818",
+}
+
+const farmerTypeImages = {
+  1: "https://lh3.googleusercontent.com/KC-PSCuwK_Qv_k-Eu_NWh1Tfy1SPhs7XrjqLtVLq81J3-JU6Vxqt4QqizIJ2qBpy6HReCW4a3ycZ4o9BAeQP=w3360-h1818",
+}
+
 class Base extends React.Component {
 
   constructor(props) {
@@ -58,8 +66,11 @@ class Base extends React.Component {
     const userDiv = _.isEmpty(userInfo) ? null : (
       <div style={userinfoStyle}>
         <pre>
-          Welcome back, {userInfo.entityName}<br/>
-          Farmer Type, {userInfo.entityType}
+          <div style={{flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column'}}>
+            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> Welcome back, {userInfo.entityName}</div> <br/>
+            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> <span>Entity type,</span> <img height="50" width="50" src={entityTypeImages[userInfo.entityType]} /> </div> <br/>
+            <div style={{flex: 1, display: 'flex', textAlign: 'center', justifyContent: 'center'}}> <span>Farmer Type,</span> <img height="50" width="50" src={farmerTypeImages[userInfo.farmerType]} /></div>
+          </div>
         </pre>
       </div>
     );
