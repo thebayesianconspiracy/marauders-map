@@ -7,8 +7,10 @@ import utils from '../actions/utils';
 
 import { getLots } from '../actions/lots';
 
-const userinfo = {
-  'text-align' : 'right'
+const userinfoStyle = {
+  'text-align' : 'right',
+  'margin-right': '20px',
+  'margin-top': '20px'
 };
 
 const lotDataStyle = {
@@ -27,7 +29,8 @@ const lotRoot = {
 
 const rootStyle = {
   'flex-direction': 'column',
-  flex: 1
+  flex: 1,
+  'background-color': '#2ecc71',
 };
 
 const nav = {
@@ -51,12 +54,12 @@ class Base extends React.Component {
   }
   
   render() {
-    const userInfo = this.props.login.get('data') || {};
+    const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
     const userDiv = _.isEmpty(userInfo) ? null : (
-      <div style={userinfo}>
+      <div style={userinfoStyle}>
         <pre>
-          Welcome back, {JSON.stringify(userInfo)}
+          Welcome back, {userInfo.entityName}<br/>
           Farmer Type, {userInfo.entityType}
         </pre>
       </div>
@@ -78,8 +81,7 @@ class Base extends React.Component {
           <div style={lotDataStyle}>
             {lotData}
           </div>
-          <div style={Object.assign({}, userinfo)}>
-            
+          <div style={Object.assign({}, userinfoStyle)}>
           </div>
         </div>
       </div>
