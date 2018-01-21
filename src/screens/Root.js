@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { LocalForm, Control } from 'react-redux-form';
 import Signup from './Signup';
-import Base from './Base';
+import Router from './Router';
 const _ = require('lodash');
 
 class Root extends React.Component {
@@ -27,7 +27,7 @@ class Root extends React.Component {
     const username = this.props.login.get('username');
     return _.isEmpty(username) ? (
       <Signup />
-    ) : <Base />;
+    ) : <Router />;
   }
 }
 

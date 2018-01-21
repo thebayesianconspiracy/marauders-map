@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import Root from './screens/Root';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import utils from './Utils.js'
+const history = syncHistoryWithStore(browserHistory, store)
 
 class App extends Component {
 
@@ -14,7 +17,9 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Root />
+        <Router history={history}>
+          <Route path="/" component={Root} />
+        </Router>
       </Provider>
     );
   }
