@@ -7,7 +7,7 @@ async function signUp(name, password) {
   const admin = rest.createUser(name, password);
   const value = await co(admin);
   const fillUser = await co(rest.fillUser(value.name, value.address));
-  return fillUser;
+  return value;
 }
 
 async function triggerContract(admin, name, method, args) {
