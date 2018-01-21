@@ -48,6 +48,21 @@ const farmerTypeImages = {
   1: "https://image.ibb.co/etf28b/organic.png",
 }
 
+function formatDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
 class Base extends React.Component {
 
   constructor(props) {
@@ -88,7 +103,7 @@ class Base extends React.Component {
 
     const lotData = _.map(lots, lot => (
       <div>
-        Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}
+        Lot location: {lot.location}, date: {formatDate(new Date(lot.created))}
       </div>
     ));
     return (
