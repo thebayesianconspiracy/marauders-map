@@ -12,6 +12,7 @@
     "lodash": "^4.17.4",
     "path-match": "^1.2.4",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-redux-form": "^1.16.4",
