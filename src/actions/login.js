@@ -14,6 +14,19 @@ const farmerTypeEnums = {
   Regular: 2
 };
 
+const lotTypeEnums = {
+  Organic: 0,
+  Regular: 1
+}
+
+const lotStateEnums = {
+  Created: 0,
+  ForSale: 1,
+  BuyerFound: 2,
+  InTransit: 3,
+  Received: 4
+}
+
 export function login({ username, password, entityType, farmerType }) {
   return async function (dispatch, getState) {
     try {
