@@ -93,54 +93,53 @@ contract LotManager is ErrorCodes, Util, LotState, LotType, LotEvent, BidState {
     return (ErrorCodes.SUCCESS, bidId);
   }
 
-/*
-  function settleProject(string name, address supplierAddress, address bidAddress) returns (ErrorCodes) {
+
+  function settleBid(address farmerAddress, address bidAddress) returns (ErrorCodes) {
     // validity
-    if (!exists(name)) return (ErrorCodes.NOT_FOUND);
-    // set project state
-    address projectAddress = getProject(name);
-    var (errorCode, state) = handleEvent(projectAddress, ProjectEvent.RECEIVE);
+    if (!exists(farmerAddress)) return (ErrorCodes.NOT_FOUND);
+    // set lot state
+    address lotAddress = getLot(farmerAddress);
+    var (errorCode, state) = handleEvent(lotAddress, LotEvent.RECEIVE);
     if (errorCode != ErrorCodes.SUCCESS) return errorCode;
     // settle
     Bid bid = Bid(bidAddress);
-    return bid.settle(supplierAddress);
+    return bid.settle(farmerAddress);
   }
 
  
-  function handleEvent(address projectAddress, ProjectEvent projectEvent) returns (ErrorCodes, ProjectState) {
-    Project project = Project(projectAddress);
-    ProjectState state = project.getState();
+  function handleEvent(address lotAddress, LotEvent lotEvent) returns (ErrorCodes, LotState) {
+    Lot lot = Lot(lotAddress);
+    LotState state = lot.getState();
     // check transition
-    var (errorCode, newState) = fsm(state, projectEvent);
+    var (errorCode, newState) = fsm(state, lotEvent);
     // event is not valid in current state
     if (errorCode != ErrorCodes.SUCCESS) {
       return (errorCode, state);
     }
     // use the new state
-    project.setState(newState);
+    lot.setState(newState);
     return (ErrorCodes.SUCCESS, newState);
   }
 
-  function fsm(ProjectState state, ProjectEvent projectEvent) returns (ErrorCodes, ProjectState) {
+  function fsm(LotState state, LotEvent lotEvent) returns (ErrorCodes, LotState) {
     // NULL
-    if (state == ProjectState.NULL)
+    if (state == LotState.Created)
       return (ErrorCodes.ERROR, state);
     // OPEN
-    if (state == ProjectState.OPEN) {
-      if (projectEvent == ProjectEvent.ACCEPT)
-        return (ErrorCodes.SUCCESS, ProjectState.PRODUCTION);
+    if (state == LotState.Created) {
+      if (lotEvent == LotEvent.ACCEPT)
+        return (ErrorCodes.SUCCESS, LotState.BuyerFound);
     }
-    // PRODUCTION
-    if (state == ProjectState.PRODUCTION) {
-      if (projectEvent == ProjectEvent.DELIVER)
-        return (ErrorCodes.SUCCESS, ProjectState.INTRANSIT);
+    if (state == LotState.BuyerFound) {
+      if (lotEvent == LotEvent.DELIVER)
+        return (ErrorCodes.SUCCESS, LotState.InTransit);
     }
     // INTRANSIT
-    if (state == ProjectState.INTRANSIT) {
-      if (projectEvent == ProjectEvent.RECEIVE)
-        return (ErrorCodes.SUCCESS, ProjectState.RECEIVED);
+    if (state == LotState.InTransit) {
+      if (lotEvent == LotEvent.RECEIVE)
+        return (ErrorCodes.SUCCESS, LotState.Received);
     }
     return (ErrorCodes.ERROR, state);
   }
-  */
+  
 }

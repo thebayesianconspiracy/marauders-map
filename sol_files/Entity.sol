@@ -8,15 +8,15 @@ import GovtVerification.sol
 contract Entity2 is ErrorCodes,  Util, EntityType, FarmerType, GovtVerification {
   EntityType public entityType;
   FarmerType public farmerType;
-  address public account;
+  //address public account;
   string public entityName;
   string public pwHash;
   uint public id;
   GovtVerification public govtVerification;
 
 
-  function Entity2 (address _account, string _entityName, string _pwHash, uint _id, EntityType _entityType, FarmerType _farmerType, GovtVerification _govtVerification) {
-    account = _account;
+  function Entity2 (string _entityName, string _pwHash, uint _id, EntityType _entityType, FarmerType _farmerType, GovtVerification _govtVerification) {
+    //account = _account;
     entityName = _entityName;
     pwHash = _pwHash;
     entityType = _entityType;
