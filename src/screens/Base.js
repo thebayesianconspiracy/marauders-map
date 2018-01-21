@@ -97,7 +97,7 @@ class Base extends React.Component {
           Welcome back, {userInfo.entityName}</div>
       <div>
           <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
-          <a style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
+          <a style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:5609">Farmer Intelligence</a>
           <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
         </div>
         <div style={{nav}}>
