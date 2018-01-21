@@ -28,6 +28,10 @@ const lotStateEnums = {
   Received: 4
 }
 
+window.logout = function() {
+  delete localStorage.username;
+}
+
 export function login({ username, password, entityType, farmerType }) {
   return async function (dispatch, getState) {
     try {
