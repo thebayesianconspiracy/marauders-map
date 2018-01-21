@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LocalForm, Control } from 'react-redux-form';
+import _ from 'lodash';
+import store from '../store';
+
+import history from '../history';
 import Signup from './Signup';
-import Router from './Router';
-const _ = require('lodash');
+import Base from './Base';
+import LotAdd from './LotAdd';
 
-class Root extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-  
-  handleChange(values) {
-    
-  }
-  
-  handleUpdate(form) {
-    
-  }
-  
-  handleSubmit(values) {
-    console.log('values are', values);
-  }
+class Router extends Component {
   
   render() {
-    const username = this.props.login.get('username');
-    return _.isEmpty(username) ? (
-      <Signup />
-    ) : <Router />;
+    const username = this.props.login.username;
+
+    if (_.isEmpty(username)) {
+      return (<Signup />);
+    }
+
+    const path = window.location.pathname;
+    
+    if (path.match(/addlots/i)) {
+      return(
+        <LotAdd />
+      )
+    }
+    return (<Base />)
   }
 }
 
@@ -37,4 +34,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(Root);
+export default connect(mapStateToProps)(Router);

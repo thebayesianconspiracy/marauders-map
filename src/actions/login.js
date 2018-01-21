@@ -32,7 +32,7 @@ export function login({ username, password, entityType, farmerType }) {
     try {
       const admin = await utils.signUp(username, password);
       console.log('admin is', admin);
-      const contract = await utils.triggerContract(admin, 'EntityManager', 'createEntity', {
+      const contract = await utils.triggerContract(admin, 'EntityManager2', 'createEntity', {
         entityName: admin.name,
         pwHash: admin.password,
         entityType: entityTypeEnums[entityType] || 0,
