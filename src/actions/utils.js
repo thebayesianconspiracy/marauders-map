@@ -2,6 +2,7 @@ import ba from 'blockapps-rest-mod';
 const { rest, common } = ba;
 const { util, config, Promise } = common;
 const co = require('co');
+const _ = require('lodash');
 
 async function signUp(name, password) {
   const admin = rest.createUser(name, password);
@@ -14,7 +15,7 @@ async function triggerContract(admin, name, method, args) {
   const contractAddress = await co(rest.query(name));
   const contract = {
     name,
-    address: contractAddress[0]
+    address: _.first(contractAddress)
   }
   const caller = await co(rest.callMethod(admin, contract, method, args));
   return contract;
