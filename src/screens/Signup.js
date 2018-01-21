@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import store from '../store';
 import { LocalForm, Control } from 'react-redux-form';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { login } from '../actions/login';
+import { Router, Route, browserHistory, Link } from 'react-router';
+
+
+function isLoggedIn() {
+  const username = store.getState().login.username || localStorage.username;
+  return !_.isEmpty(username);
+}
+
 
 class Signup extends React.Component {
   
@@ -15,6 +25,22 @@ class Signup extends React.Component {
   
   handleSubmit(values) {
     this.props.dispatch(login(values));
+  }
+
+  componentDidMount() {
+    if (isLoggedIn()) {
+      // set the current url/path for future redirection (we use a Redux action)
+      // then redirect (we use a React Router method)
+      browserHistory.replace("/")
+    }
+  }
+
+  componentWillReceiveProps() {
+    if (isLoggedIn()) {
+      // set the current url/path for future redirection (we use a Redux action)
+      // then redirect (we use a React Router method)
+      browserHistory.replace("/")
+    }
   }
   
   render() {

@@ -11,6 +11,14 @@ async function signUp(name, password) {
   return value;
 }
 
+
+async function search(query) {
+  const admin = rest.query2(query || "");
+  const value = await co(admin);
+  return value;
+}
+
+
 async function triggerContract(admin, name, method, args) {
   const contractAddress = await co(rest.query(name));
   const contract = {
@@ -23,5 +31,6 @@ async function triggerContract(admin, name, method, args) {
 
 export default {
   signUp,
-  triggerContract
+  triggerContract,
+  search
 };

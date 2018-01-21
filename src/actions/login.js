@@ -1,4 +1,5 @@
 import utils from './utils';
+import { Router, Route, browserHistory, Link } from 'react-router';
 
 const entityTypeEnums = {
   NULL: 0,
@@ -14,6 +15,23 @@ const farmerTypeEnums = {
   Regular: 2
 };
 
+const lotTypeEnums = {
+  Organic: 0,
+  Regular: 1
+}
+
+const lotStateEnums = {
+  Created: 0,
+  ForSale: 1,
+  BuyerFound: 2,
+  InTransit: 3,
+  Received: 4
+}
+
+window.logout = function() {
+  delete localStorage.username;
+}
+
 export function login({ username, password, entityType, farmerType }) {
   return async function (dispatch, getState) {
     try {
@@ -26,10 +44,14 @@ export function login({ username, password, entityType, farmerType }) {
         farmerType: farmerTypeEnums[farmerType] || 0
       });
       console.log('response is', contract);
+      localStorage.username = username;
+      localStorage.password = password;
+      localStorage.admin = JSON.stringify(admin);
       dispatch({
         type: 'LOGIN',
-        payload: { username, password },
+        payload: { username, password, admin },
       });
+      browserHistory.replace("/")
     } catch(e) {
       console.log('Error logging in is', e);
     }
