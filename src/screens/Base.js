@@ -5,6 +5,29 @@ import _ from 'lodash';
 
 import { getLots } from '../actions/lots';
 
+const userinfo = {
+  flex: 1,
+  display: 'inline-block'
+};
+
+const lotDataStyle = {
+  flex: 1,
+  display: 'inline-block'
+};
+
+const lotRoot = {
+  'flex-direction': 'row',
+  flex: 1,
+  'align-items': 'center',
+  'justify-content': 'center',
+  display: 'inline-block',
+}
+
+const rootStyle = {
+  'flex-direction': 'column',
+  flex: 1
+};
+
 class Base extends React.Component {
 
   constructor(props) {
@@ -19,10 +42,26 @@ class Base extends React.Component {
   
   render() {
     const username = this.props.login.get('username');
-    return (
+    const lots = this.props.lots.get('lots');
+    console.log('lots are', lots);
+    const lotData = _.map(lots, lot => (
       <div>
-        Yoyo logged in {username}
-        <Link to="/addlots">Add lots</Link>
+        Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}
+      </div>
+    ));
+    return (
+      <div style={rootStyle}>
+        <Link style={{display: 'block'}} to="/addlots">Add lots</Link>
+        <div style={lotRoot}>
+          <div style={lotDataStyle}>
+            {lotData}
+          </div>
+          <div style={Object.assign({}, userinfo)}>
+            <div style={userinfo}>
+              Welcome back, {username}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -31,6 +70,7 @@ class Base extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     login: state.login,
+    lots: state.lots
   }
 }
 
