@@ -39,11 +39,11 @@ const nav = {
 }
 
 const entityTypeImages = {
-  1: "https://lh4.googleusercontent.com/Gq4YdQzTGszaJUj7SPpJbwKtb_azZAdDag8lCud1t1ymQCSVflIlKYgfON4LJn1auiRkRT2iWZzZaMq4Jleq=w3360-h1818",
+  1: "https://image.ibb.co/etf28b/organic.png",
 }
 
 const farmerTypeImages = {
-  1: "https://lh3.googleusercontent.com/KC-PSCuwK_Qv_k-Eu_NWh1Tfy1SPhs7XrjqLtVLq81J3-JU6Vxqt4QqizIJ2qBpy6HReCW4a3ycZ4o9BAeQP=w3360-h1818",
+  1: "https://image.ibb.co/j7UvTb/farmer1.png",
 }
 
 class Base extends React.Component {
