@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import Signup from './screens/Signup';
+import Root from './screens/Root';
 
 import utils from './Utils.js'
 
@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Signup />
+        <Root />
       </Provider>
     );
   }

@@ -12,7 +12,7 @@ const initialState = Immutable.Map({
 /// ACTION-REDUCER MAP ////
 //////////////////////////
 export const REDUCERS = {
-  CART_UPDATE_ADDRESS: (state, address) => state.merge({address}),
+  LOGIN: (state, { username, password }) => state.merge({ username, password }),
 };
 
 //////////////////////////

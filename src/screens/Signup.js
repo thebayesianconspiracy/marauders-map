@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { LocalForm, Control } from 'react-redux-form';
+import { connect } from 'react-redux';
+import { login } from '../actions/login';
 
-export default class MyApp extends React.Component {
+class Signup extends React.Component {
   
   handleChange(values) {
     
@@ -12,19 +14,29 @@ export default class MyApp extends React.Component {
   }
   
   handleSubmit(values) {
-    
+    this.props.dispatch(login(values));
   }
   
   render() {
     return (
       <LocalForm
+          style={[styles.form]}
           onUpdate={(form) => this.handleUpdate(form)}
           onChange={(values) => this.handleChange(values)}
           onSubmit={(values) => this.handleSubmit(values)}
       >
-        <Control.text model=".username" />
-        <Control.text model=".password" />
+        <Control.text placeholder="username" model=".username" />
+        <Control.text placeholder="password" model=".password" />
+        <button>Submit!</button>
       </LocalForm>
     );
   }
 }
+
+const styles = {
+  form: {
+    
+  }
+};
+
+export default connect()(Signup);
