@@ -64,6 +64,7 @@ export function addLots({ created, location, num }) {
         const promise = await utils.triggerContract(admin, 'LotManager', 'createLot', args);
 
         console.log('contract is', promise);
+        browserHistory.replace("/")
       }
       
     } catch(e) {
