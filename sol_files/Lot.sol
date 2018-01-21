@@ -1,8 +1,7 @@
-import 1.sol
 import LotState.sol
 import LotType.sol
 
-contract Lot is ErrorCodes, LotType, LotState { 
+contract Lot is LotType, LotState { 
   LotType public lotType;
   uint public lotID;
   uint public created;
