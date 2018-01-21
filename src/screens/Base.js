@@ -51,13 +51,15 @@ class Base extends React.Component {
     ));
     return (
       <div style={rootStyle}>
-        <Link to="/addlots">Add lots</Link>
+        <Link style={{display: 'block'}} to="/addlots">Add lots</Link>
         <div style={lotRoot}>
           <div style={lotDataStyle}>
             {lotData}
           </div>
-          <div style={userinfo}>
-            Welcome back, {username}
+          <div style={Object.assign({}, userinfo)}>
+            <div style={userinfo}>
+              Welcome back, {username}
+            </div>
           </div>
         </div>
       </div>
