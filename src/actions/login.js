@@ -1,4 +1,5 @@
 import utils from './utils';
+import { Router, Route, browserHistory, Link } from 'react-router';
 
 const entityTypeEnums = {
   NULL: 0,
@@ -39,10 +40,12 @@ export function login({ username, password, entityType, farmerType }) {
         farmerType: farmerTypeEnums[farmerType] || 0
       });
       console.log('response is', contract);
+      localStorage.username = username;
       dispatch({
         type: 'LOGIN',
         payload: { username, password },
       });
+      browserHistory.replace("/")
     } catch(e) {
       console.log('Error logging in is', e);
     }
