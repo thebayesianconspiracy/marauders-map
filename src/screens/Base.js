@@ -96,9 +96,9 @@ class Base extends React.Component {
         <div style={{textAlign: 'right', marginRight: '10px'}}>
           Welcome back, {userInfo.entityName}</div>
       <div>
-          <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
-          <a style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
-          <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
+          <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
+          <a style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
+          <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
         </div>
         <div style={{nav}}>
           {userDiv}
