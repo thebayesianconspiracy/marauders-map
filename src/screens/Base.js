@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
-const _ = require('lodash');
+import _ from 'lodash';
+
+import { getLots } from '../actions/lots';
 
 class Base extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getLots());
   }
   
   render() {
