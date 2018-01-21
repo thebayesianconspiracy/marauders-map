@@ -45,11 +45,11 @@ contract EntityManager is ErrorCodes, Util, EntityType, FarmerType, GovtVerifica
     // fail if entityName exists
     if (exists(entityName)) return ErrorCodes.EXISTS;
     // add user
-    address account =  msg.sender;
+    //address account =  msg.sender;
     uint entityId = Entities.length;
     entityToIdMap[b32(entityName)] = entityId;
     GovtVerification verification = GovtVerification.UnVerified;
-    Entities.push(new Entity2(account, entityName, pwHash, entityId, entityType, farmerType, verification));
+    Entities.push(new Entity2(entityName, pwHash, entityId, entityType, farmerType, verification));
     return ErrorCodes.SUCCESS;
   }
 
