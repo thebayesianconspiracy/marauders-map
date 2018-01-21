@@ -19,9 +19,17 @@ class Base extends React.Component {
   
   render() {
     const username = this.props.login.get('username');
+    const lots = this.props.lots.get('lots');
+    console.log('lots are', lots);
+    const lotData = _.map(lots, lot => (
+      <div>
+      Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}
+      </div>
+    ));
     return (
       <div>
         Yoyo logged in {username}
+        {lotData}
         <Link to="/addlots">Add lots</Link>
       </div>
     );
@@ -31,6 +39,7 @@ class Base extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     login: state.login,
+    lots: state.lots
   }
 }
 
