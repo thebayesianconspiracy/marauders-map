@@ -28,7 +28,7 @@ class Base extends React.Component {
     ));
     return (
       <div>
-        Yoyo logged in {username}
+        Welcome back, {username}
         {lotData}
         <Link to="/addlots">Add lots</Link>
       </div>
