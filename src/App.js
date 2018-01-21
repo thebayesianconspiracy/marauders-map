@@ -5,7 +5,6 @@ import Root from './screens/Root';
 import { Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import utils from './Utils.js'
 const history = syncHistoryWithStore(browserHistory, store)
 
 class App extends Component {
