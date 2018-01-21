@@ -6,9 +6,9 @@ import _ from 'lodash';
 import { addLots } from '../actions/lots';
 
 const formRoot = {
-  'flex-direction': "row",
+  'flexDirection': "row",
   'justify-content': "center",
-  'align-items': "center",
+  'alignItems': "center",
   display: "flex"
 };
 
@@ -21,10 +21,10 @@ const inputStyle = {
 };
 
 const form = {
-  'border-width': 1,
-  'flex-direction': "column",
+  'borderWidth': 1,
+  'flexDirection': "column",
   'justify-content': "center",
-  'align-items': "center",
+  'alignItems': "center",
   display: "flex"
 };
 
@@ -66,7 +66,7 @@ class Base extends React.Component {
         >
           <Control.text style={inputStyle} placeholder="location" model=".location" />
           <Control.text style={inputStyle} placeholder="number" model=".num" />
-          <button style={inputStyle}>Submit!</button>
+          <button style={inputStyle}>Submit</button>
         </LocalForm>
       </div>
     )

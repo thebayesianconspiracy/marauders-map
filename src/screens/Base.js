@@ -30,7 +30,6 @@ const lotRoot = {
 const rootStyle = {
   'flex-direction': 'column',
   flex: 1,
-  'background-color': '#2ecc71',
 };
 
 const nav = {
@@ -76,7 +75,7 @@ class Base extends React.Component {
         <div style={{nav}}>
           {userDiv}
         </div>
-        <Link style={{display: 'block'}} to="/addlots">Add lots</Link>
+        <Link style={{marginBottom: '10px', display: 'block', color: 'blue', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
         <div style={lotRoot}>
           <div style={lotDataStyle}>
             {lotData}

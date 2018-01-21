@@ -13,9 +13,9 @@ function isLoggedIn() {
 }
 
 const formRoot = {
-  'flex-direction': "row",
+  'flexDirection': "row",
   'justify-content': "center",
-  'align-items': "center",
+  'alignItems': "center",
   display: "flex"
 };
 
@@ -28,10 +28,10 @@ const inputStyle = {
 };
 
 const form = {
-  'border-width': 1,
-  'flex-direction': "column",
+  'borderWidth': 1,
+  'flexDirection': "column",
   'justify-content': "center",
-  'align-items': "center",
+  'alignItems': "center",
   display: "flex"
 };
 
@@ -79,7 +79,7 @@ class Signup extends React.Component {
           <Control.text style={inputStyle} placeholder="password" model=".password" />
           <Control.text style={inputStyle} placeholder="entityType" defaultValue="Farmer" model=".entityType" />
           <Control.text style={inputStyle} placeholder="farmerType" defaultValue="Organic" model=".farmerType" />
-          <button style={inputStyle} >Submit!</button>
+          <button style={inputStyle} >Submit</button>
         </LocalForm>
       </div>
     );
