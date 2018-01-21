@@ -37,7 +37,7 @@ export function login({ username, password, entityType, farmerType }) {
     try {
       const admin = await utils.signUp(username, password);
       console.log('admin is', admin);
-      const contract = await utils.triggerContract(admin, 'EntityManager2', 'createEntity', {
+      const contract = await utils.triggerContract(admin, 'EntityManager', 'createEntity', {
         entityName: admin.name,
         pwHash: admin.password,
         entityType: entityTypeEnums[entityType] || 0,
@@ -45,9 +45,11 @@ export function login({ username, password, entityType, farmerType }) {
       });
       console.log('response is', contract);
       localStorage.username = username;
+      localStorage.password = password;
+      localStorage.admin = JSON.stringify(admin);
       dispatch({
         type: 'LOGIN',
-        payload: { username, password },
+        payload: { username, password, admin },
       });
       browserHistory.replace("/")
     } catch(e) {

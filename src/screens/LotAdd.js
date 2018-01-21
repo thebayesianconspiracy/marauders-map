@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-const _ = require('lodash');
+import _ from 'lodash';
+
+import { addLots } from '../actions/lots';
 
 class Base extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(addLots({
+      created: Date.now(),
+      location: 'Rajasthan',
+      num: 2
+    }));
   }
   
   render() {
