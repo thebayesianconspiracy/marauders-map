@@ -1,7 +1,7 @@
-import 7.sol
+import Entity.sol
 
 contract EntityManager is ErrorCodes, Util, EntityType, FarmerType, GovtVerification {
-  Entity[] Entities;
+  Entity2[] Entities;
   /*
     note on mapping to array index:
     a non existing mapping will return 0, so 0 should not be a valid value in a map,
@@ -39,7 +39,7 @@ contract EntityManager is ErrorCodes, Util, EntityType, FarmerType, GovtVerifica
     return Entities[entityId].getVerification();
   }
 
-  function createEntity(string entityName, bytes32 pwHash, EntityType entityType, FarmerType farmerType, bytes32 pubKey) returns (ErrorCodes) {
+  function createEntity(string entityName, string pwHash, EntityType entityType, FarmerType farmerType) returns (ErrorCodes) {
     // name must be < 32 bytes
     if (bytes(entityName).length > 32) return ErrorCodes.ERROR;
     // fail if entityName exists
@@ -49,16 +49,16 @@ contract EntityManager is ErrorCodes, Util, EntityType, FarmerType, GovtVerifica
     uint entityId = Entities.length;
     entityToIdMap[b32(entityName)] = entityId;
     GovtVerification verification = GovtVerification.UnVerified;
-    Entities.push(new Entity(account, entityName, pwHash, entityId, entityType, farmerType, pubKey, verification));
+    Entities.push(new Entity2(account, entityName, pwHash, entityId, entityType, farmerType, verification));
     return ErrorCodes.SUCCESS;
   }
 
-  function login(string entityName, bytes32 pwHash) returns (bool) {
+  function login(string entityName, string pwHash) returns (bool) {
     // fail if username doesnt exists
     if (!exists(entityName)) return false;
     // get the user
     address a = getEntity(entityName);
-    Entity entity = Entity(a);
+    Entity2 entity = Entity2(a);
     return entity.authenticate(pwHash);
   }
 }

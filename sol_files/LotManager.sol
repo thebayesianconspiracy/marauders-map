@@ -1,7 +1,7 @@
 import Lot.sol;
-import 3.sol;
+import Util.sol;
 import LotEvent.sol;
-import BidState.sol;
+import Bid.sol;
 
 /**
 * Interface for Project data contracts
@@ -30,10 +30,10 @@ contract LotManager is ErrorCodes, Util, LotState, LotType, LotEvent, BidState {
     return addressToIndexMap[name] != 0;
   }
 
-  function getAllLots(address owner) returns (Lot[]) {
-    //TODO How to get all lots of one address?
-    Lot[] lots;
-    return lots;
+
+  function getLot(address owner) returns (address) {
+    uint index = addressToIndexMap[owner];
+    return lots[index];
   }
 
   function createLot(
@@ -47,7 +47,7 @@ contract LotManager is ErrorCodes, Util, LotState, LotType, LotEvent, BidState {
     // add project
     uint index = lots.length;
     address ownerAddress = msg.sender;
-    addressToIndexMap[ownerAddress] = index;
+    // addressToIndexMap[ownerAddress] = index;
     LotState lotState = LotState.Created;
     LotType lotType = LotType.Organic;
     uint lotID = 1;
@@ -65,20 +65,35 @@ contract LotManager is ErrorCodes, Util, LotState, LotType, LotEvent, BidState {
   }
 
   function createMultipleLots(
-  ) returns (ErrorCodes) {
+    uint created,
+    string location,
+    uint numOfLots
+  ) returns (uint[]) {
     //TODO Implement Multiple lots addition
-    return ErrorCodes.SUCCESS;
+    uint[] lotIDs;
+    for(uint i = 0; i < numOfLots; i++)
+    {
+        lotIDs[i] = createLot(created, location);
+    } 
+    return lotIDs;
   }
-/*
-  function createBid(string name, string supplier, uint amount) returns (ErrorCodes, uint) {
+
+  function createBid(address[] lotAddresses, uint amount) returns (ErrorCodes, uint) {
     // fail if project name not found
-    if (!exists(name)) return (ErrorCodes.NOT_FOUND, 0);
+    address farmerAddress = msg.sender;
+    if (!exists(farmerAddress)) return (ErrorCodes.NOT_FOUND, 0);
     // create bid
     bidId++; // increment the unique id
-    Bid bid = new Bid(bidId, name, supplier, amount);
+    Bid bid = new Bid(bidId, farmerAddress, lotAddresses, amount, BidState.OPEN);
+    for(uint i = 0; i < lotAddresses.length; i++)
+    {
+        uint id = addressToIndexMap[lotAddresses[i]];
+        lots[id].setState(LotState.ForSale);
+    } 
     return (ErrorCodes.SUCCESS, bidId);
   }
 
+/*
   function settleProject(string name, address supplierAddress, address bidAddress) returns (ErrorCodes) {
     // validity
     if (!exists(name)) return (ErrorCodes.NOT_FOUND);

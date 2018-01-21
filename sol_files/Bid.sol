@@ -1,5 +1,5 @@
-import 1.sol;
-import "./BidState.sol";
+import ErrorCodes.sol;
+import BidState.sol;
 
 /**
  * Bid data contract
@@ -7,17 +7,17 @@ import "./BidState.sol";
 contract Bid is ErrorCodes, BidState {
   // NOTE: members must be public to be indexed for search
   uint public id;
-  string public name;
-  string public supplier;
+  address public creatorAddress;
+  address[] public lotAddresses;
   uint public amount;
   BidState public state;
 
-  function Bid(uint _id, string _name, string _supplier, uint _amount) {
+  function Bid(uint _id, address _creatorAddress, address[] _lotAddresses, uint _amount, BidState _bidState) {
     id = _id;
-    name = _name;
-    supplier = _supplier;
+    creatorAddress = _creatorAddress;
+    lotAddresses = _lotAddresses;
     amount = _amount;
-    state = BidState.OPEN;
+    state = _bidState;
   }
 
   function getState() returns (BidState) {
@@ -40,7 +40,7 @@ contract Bid is ErrorCodes, BidState {
     return ErrorCodes.ERROR;
   }
 
-  function settle(address supplierAddress) returns (ErrorCodes) {
+  function settle(address farmerAddress) returns (ErrorCodes) {
     // confirm balance, to return error
     if (this.balance < amount) {
       return ErrorCodes.INSUFFICIENT_BALANCE;
@@ -49,7 +49,7 @@ contract Bid is ErrorCodes, BidState {
     uint amountWei = amount * 1 ether;
 
     // transfer will throw
-    supplierAddress.send(amountWei-fee);
+    farmerAddress.send(amountWei-fee);
     return ErrorCodes.SUCCESS;
   }
 }
