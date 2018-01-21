@@ -13,7 +13,7 @@ async function signUp(name, password) {
 
 
 async function search(query) {
-  const admin = rest.query(query);
+  const admin = rest.query(query || "");
   const value = await co(admin);
   return value;
 }

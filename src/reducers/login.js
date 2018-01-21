@@ -5,7 +5,7 @@ import _ from 'lodash';
 ///// INITIAL STATE ////
 ////////////////////////
 const initialState = Immutable.Map({
-  
+  username: localStorage.username,
 });
 
 ///////////////////////////

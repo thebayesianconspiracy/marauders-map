@@ -35,7 +35,7 @@ window.logout = function() {
 export function getLots(query) {
   return async function (dispatch, getState) {
     try {
-      const lots = await utils.search(query);
+      const lots = await utils.search("Lot?ownerAddress=eq." + query);
       console.log('lots are', lots);
     } catch(e) {
       console.log('Error logging in is', e);

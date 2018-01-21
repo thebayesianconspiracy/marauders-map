@@ -12,7 +12,8 @@ class Base extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(getLots());
+    const username = this.props.login.get('username');
+    this.props.dispatch(getLots(username));
   }
   
   render() {
