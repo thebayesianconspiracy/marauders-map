@@ -65,6 +65,7 @@ export function addLots({ created, location, num }) {
 
         console.log('contract is', promise);
       }
+      browserHistory.replace("/")
       
     } catch(e) {
       console.log('Error logging in is', e);
