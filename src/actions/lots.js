@@ -30,11 +30,6 @@ const lotStateEnums = {
   Received: 4
 }
 
-window.logout = function() {
-  delete localStorage.username;
-}
-
-
 export function sellLots({ lots, amount }) {
   return (dispatch, getState) => {
     dispatch({
