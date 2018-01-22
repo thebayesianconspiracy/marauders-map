@@ -10,7 +10,7 @@ library(tidyr)
 
 
 
-a <- fread("~/Documents/per/blockchain_hackathon/data2.csv")
+a <- fread("~/Downloads/data2.csv")
 fertiOrder <- c("Fertilizer1","Fertilizer2")
 seedOrder <- c("Seed1","Seed2")
 waterOrder <- c("Borewells","Canal","Drip")
@@ -25,8 +25,7 @@ ui <- shinyUI(
       column(width = 10, # width of first column 
              style = "font-size: 25pt; width = 100", # font size etc.
              tags$strong("BLOTS : Farmer Intelligence Platform")), # "tags" is for using html-functions within the 
-      column(width = 2,
-             tags$head(tags$img(src='https://lh5.googleusercontent.com/5FIbHtIGMn5HSed3937c9DvLF43AtU_hHzLumJ1qY7Jlxu0yu6zTmjXpm7tHmW6UVMfROjUfFvdW97RULFVm=w3360-h1818',align = "left", width= "150", height="100"))) # add image from url
+      column(width = 2) # add image from url
     ),
     sidebarPanel(style = "background-color: #78d9c9;", # choose background color
                  tags$style(type='text/css',
