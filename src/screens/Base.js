@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import _ from 'lodash';
+import Modal from 'react-modal';
 
 import utils from '../actions/utils';
 
@@ -68,10 +69,34 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.values = {};
+    this.state = {
+      showAddSale: false,
+    };
+  }
+
+  getModal(data, state) {
+    const closeFn = () => this.toggle(state);
+    return (
+      <Modal
+          isOpen={this.state[state]}
+          contentLabel="Lots for sale"
+      >
+        <div style={{ marginTop: 80, flexDirection: 'row', display: 'flex', textAlign: 'center', justifyContent: 'center' }}>
+          <div onClick={closeFn} style={{ position: 'absolute', top: 10, right: 10 }}>X</div>
+          {data}
+        </div>
+      </Modal>
+    );
   }
 
   componentDidMount() {
     
+  }
+
+  toggle(state) {
+    this.setState({
+      [state]: !this.state[state]
+    });
   }
 
   handleInputChangeLot(lot) {
@@ -149,20 +174,28 @@ class Base extends React.Component {
       width: '800px',
       borderCollapse: 'collapse',
     };
+
+    const sellModal = this.getModal(
+      (
+        <span>Add Lot for Sale</span>
+      ),
+      "showAddSale"
+    );
     
     return (
       <div style={rootStyle}>
+        {sellModal}
         <div style={{textAlign: 'right', marginRight: '40px'}}>
           Welcome back, {userInfo.entityName}</div>
       <div>
-          <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
-          <a style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:5609">Farmer Intelligence</a>
-          <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
-        </div>
-        <div style={{nav}}>
-          {userDiv}
-        </div>
-        <div style={lotRoot}>
+        <span onClick={this.toggle.bind(this, "showAddSale")} style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} >Add lots</span>
+        <a  style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:5609">Farmer Intelligence</a>
+        <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
+      </div>
+      <div style={{nav}}>
+        {userDiv}
+      </div>
+      <div style={lotRoot}>
           
           <h2>List of Lots</h2>
           <div style={lotDataStyle}>
