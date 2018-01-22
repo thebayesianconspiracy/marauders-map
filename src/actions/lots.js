@@ -34,11 +34,22 @@ window.logout = function() {
   delete localStorage.username;
 }
 
+
 export function sellLots({ lots, amount }) {
   return (dispatch, getState) => {
     dispatch({
       type: 'SELL_LOTS',
-      payload: { data: lots },
+      payload: { data: lots, amount },
+    });
+  }
+}
+
+
+export function addBids({ lots, amount }) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'BID_LOTS',
+      payload: { data: lots, amount },
     });
   }
 }

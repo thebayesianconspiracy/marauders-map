@@ -1,5 +1,6 @@
 import utils from './utils';
 import { Router, Route, browserHistory, Link } from 'react-router';
+import _ from 'lodash';
 
 const entityTypeEnums = {
   NULL: 0,
@@ -29,10 +30,11 @@ const lotStateEnums = {
 }
 
 window.logout = function() {
-  delete localStorage.username;
-  delete localStorage.login;
-  delete localStorage.lotState;
-  browserHistory.replace("/")
+  _.forEach(Object.keys(localStorage), key => {
+    console.log(localStorage, key);
+    delete localStorage[key];
+  });
+  window.location.reload();
 }
 
 export function login({ username, password, entityType, farmerType }) {

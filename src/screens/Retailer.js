@@ -7,7 +7,7 @@ import { LocalForm, Control } from 'react-redux-form';
 
 import utils from '../actions/utils';
 
-import { getLots } from '../actions/lots';
+import { getLots, addBids } from '../actions/lots';
 import { getBids } from '../actions/bids';
 
 
@@ -135,7 +135,8 @@ class Base extends React.Component {
   }
 
   handleSubmitSale(values) {
-    console.log('sale', values);
+    console.log('sale', values, this.values);
+    this.props.dispatch(addBids({ lots: this.values, amount: values.amount }));
     this.toggle("showAddSale");
   }
 
@@ -166,10 +167,10 @@ class Base extends React.Component {
           <th style={tableStyle}>Bid?</th>
           <th style={tableStyle}>Location</th>
           <th style={tableStyle}>Date created</th>
-          <th style={tableStyle}>Bids Received</th>
+          <th style={tableStyle}>Status</th>
         </tr>
       )],
-      _.chain(lots).filter(lot => lot.status == "For Sale").map(lot => (
+      _.chain(lots).filter(lot => lot.status != "Created").map(lot => (
         <tr>
           <td style={tableStyle}>
             <input
@@ -178,7 +179,7 @@ class Base extends React.Component {
           </td>
           <td style={tableStyle}>{lot.location}</td>
           <td style={tableStyle}>{formatDate(new Date(lot.created))}</td>
-          <td style={tableStyle}>{lot.bids}</td>
+          <td style={tableStyle}>{lot.status}</td>
         </tr>
       )).value()
     );

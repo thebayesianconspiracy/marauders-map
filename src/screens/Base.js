@@ -259,13 +259,6 @@ class Base extends React.Component {
               {lotData}
             </table>
           </div>
-
-          <h2>List of Bids</h2>
-          <div style={lotDataStyle}>
-            <table style={tableRootStyle}>
-              {bidData}
-            </table>
-          </div>
           
           <div style={Object.assign({}, userinfoStyle)}>
           </div>

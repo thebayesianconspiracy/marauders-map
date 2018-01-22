@@ -42,11 +42,21 @@ const initialState = Immutable.Map(initialStateTemp);
 //////////////////////////
 export const REDUCERS = {
   ADD_LOTS: (state, { data }) => state.updateIn(['lots'], lots => lots.concat(data)),
-  SELL_LOTS: (state, { data }) => state.updateIn(['lots'], lots => {
+  SELL_LOTS: (state, { data, amount }) => state.updateIn(['lots'], lots => {
     return _.map(lots, lot => {
       console.log(data, lot.id);
       if (_.has(data, lot.id)) {
         lot.status = 'For Sale';
+        lot.amount = amount;
+      }
+      return lot;
+    });
+  }),
+  BID_LOTS: (state, { data, amount }) => state.updateIn(['lots'], lots => {
+    return _.map(lots, lot => {
+      console.log(data, lot.id);
+      if (_.has(data, lot.id)) {
+        lot.status = 'Bid! Amount: ' + amount;
       }
       return lot;
     });
