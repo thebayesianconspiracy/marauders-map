@@ -17,19 +17,19 @@ try {
         created: 1516642451312 - 5 * 86400 * 1000,
         location: 'Rajasthan',
         id: 1,
-        status: 'created',
+        status: 'For Sale',
       },
       {
         created: 1516642421312 - 10 * 86400 * 1000,
         location: 'Jammu',
         id: 2,
-        status: 'created',
+        status: 'Created',
       },
       {
         created: 1516642151312 - 17 * 86400 * 1000,
         location: 'Sri Lanka',
         id: 3,
-        status: 'created',
+        status: 'Created',
       },
     ]
   };
@@ -42,6 +42,15 @@ const initialState = Immutable.Map(initialStateTemp);
 //////////////////////////
 export const REDUCERS = {
   ADD_LOTS: (state, { data }) => state.updateIn(['lots'], lots => lots.concat(data)),
+  SELL_LOTS: (state, { data }) => state.updateIn(['lots'], lots => {
+    return _.map(lots, lot => {
+      console.log(data, lot.id);
+      if (_.has(data, lot.id)) {
+        lot.status = 'For Sale';
+      }
+      return lot;
+    });
+  }),
 };
 
 //////////////////////////

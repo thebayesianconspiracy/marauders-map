@@ -169,7 +169,7 @@ class Base extends React.Component {
           <th style={tableStyle}>Bids Received</th>
         </tr>
       )],
-      _.map(lots, lot => (
+      _.chain(lots).filter(lot => lot.status == "For Sale").map(lot => (
         <tr>
           <td style={tableStyle}>
             <input
@@ -180,7 +180,7 @@ class Base extends React.Component {
           <td style={tableStyle}>{formatDate(new Date(lot.created))}</td>
           <td style={tableStyle}>{lot.bids}</td>
         </tr>
-      ))
+      )).value()
     );
 
     const bidData = _.concat(

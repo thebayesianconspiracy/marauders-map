@@ -7,7 +7,7 @@ import { LocalForm, Control } from 'react-redux-form';
 
 import utils from '../actions/utils';
 
-import { getLots } from '../actions/lots';
+import { getLots, sellLots, addLotsHack } from '../actions/lots';
 import { getBids } from '../actions/bids';
 
 
@@ -96,6 +96,7 @@ class Base extends React.Component {
     this.values = {};
     this.state = {
       showAddSale: false,
+      showAddLots : false,
     };
   }
 
@@ -135,8 +136,13 @@ class Base extends React.Component {
   }
 
   handleSubmitSale(values) {
-    console.log('sale', values);
+    this.props.dispatch(sellLots({ lots: this.values, amount: values.amount }));
     this.toggle("showAddSale");
+  }
+
+  handleSubmitLots(values) {
+    this.props.dispatch(addLotsHack({ location: values.location }));
+    this.toggle("showAddLots");
   }
 
   render() {
@@ -163,7 +169,7 @@ class Base extends React.Component {
     const lotData = _.concat(
       [(
         <tr>
-          <th style={tableStyle}>Add Lots</th>
+          <th style={tableStyle}>Add Lots?</th>
           <th style={tableStyle}>Location</th>
           <th style={tableStyle}>Date created</th>
           <th style={tableStyle}>Status</th>
@@ -204,9 +210,20 @@ class Base extends React.Component {
       width: '800px',
       borderCollapse: 'collapse',
     };
-
     
-
+    const addModal = this.getModal(
+      (
+        <LocalForm
+            style={form}
+            onSubmit={(values) => this.handleSubmitLots(values)}
+        >
+          <Control.text style={inputStyle} placeholder="Location" model=".location" />
+          <button style={inputStyle} >Submit</button>
+        </LocalForm>
+      ),
+      "showAddLots"
+    );
+    
     const sellModal = this.getModal(
       (
         <LocalForm
@@ -223,12 +240,13 @@ class Base extends React.Component {
     return (
       <div style={rootStyle}>
         {sellModal}
+        {addModal}
         <div style={{textAlign: 'right', marginRight: '40px'}}>
           Welcome back, {userInfo.entityName}</div>
       <div>
-        <span onClick={this.toggle.bind(this, "showAddSale")} style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} >Add lots</span>
+        <span onClick={this.toggle.bind(this, "showAddSale")} style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} >Sell Lots</span>
         <a  style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:7970">Farmer Intelligence</a>
-        <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/track">Sell Lots</Link>
+        <span onClick={this.toggle.bind(this, "showAddLots")} style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} >Add Lots</span>
       </div>
       <div style={{nav}}>
         {userDiv}
