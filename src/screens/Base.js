@@ -136,6 +136,7 @@ class Base extends React.Component {
 
   handleSubmitSale(values) {
     console.log('sale', values);
+    this.toggle("showAddSale");
   }
 
   render() {
