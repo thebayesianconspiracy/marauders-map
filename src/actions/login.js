@@ -30,6 +30,8 @@ const lotStateEnums = {
 
 window.logout = function() {
   delete localStorage.username;
+  delete localStorage.login;
+  delete localStorage.lotState;
   browserHistory.replace("/")
 }
 
