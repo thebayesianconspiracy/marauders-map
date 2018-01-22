@@ -70,12 +70,7 @@ class Base extends React.Component {
   }
 
   componentDidMount() {
-    const admin = this.props.login.get('admin');
-    const username = this.props.login.get('username');
-    const address = admin.address;
-    this.props.dispatch(getLots(address));
-    this.props.dispatch(getBids(address));
-    this.props.dispatch(utils.getUserInfo(username));
+    
   }
 
   render() {
@@ -92,22 +87,33 @@ class Base extends React.Component {
     const userDiv = _.isEmpty(userInfo) ? null : (
       <div style={userinfoStyle}>
         <pre>
-          <div style={{flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column'}}> <br/>
-            <div style={{position:'absolute',top:200,right:250}}> <p style={textStyle}>Entity type</p> <img height={imgSize} width={imgSize} src={entityTypeImages[userInfo.entityType]} /> </div> <br/>
-            <div style={{position:'absolute',top:200,right:20}}> <p style={textStyle}>Farmer Type </p> <img height={imgSize} width={imgSize} src={farmerTypeImages[userInfo.farmerType]} /></div>
+          <div style={{flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column', position:'absolute',top:200,right:20}}> <br/>
+            <div> <p style={textStyle}>Entity type</p> <img height={imgSize} width={imgSize} src={entityTypeImages[userInfo.entityType]} /> </div> <br/>
+            <div> <p style={textStyle}>Farmer Type </p> <img height={imgSize} width={imgSize} src={farmerTypeImages[userInfo.farmerType]} /></div>
           </div>
         </pre>
       </div>
     );
-
-    const lotData = _.map(lots, lot => (
-      <tr>
-        <td style={{borderWidth: '1px', border: 'solid', padding: '5px'}}>Lot location: {lot.location}, date: {formatDate(new Date(lot.created))}</td>
-      </tr>
-    ));
+    const tableStyle = { padding: 15, paddingLeft: 20, paddingRight: 20, borderWidth: '1px', border: 'solid', padding: '5px', textAlign: 'center' };
+    const lotData = _.concat(
+      [(
+        <tr>
+          <th style={tableStyle}>Location</th>
+          <th style={tableStyle}>Date created</th>
+          <th style={tableStyle}>Bids Received</th>
+        </tr>
+      )],
+      _.map(lots, lot => (
+        <tr>
+          <td style={tableStyle}>{lot.location}</td>
+          <td style={tableStyle}>{formatDate(new Date(lot.created))}</td>
+          <td style={tableStyle}>{lot.bids}</td>
+        </tr>
+      ))
+    );
     return (
       <div style={rootStyle}>
-        <div style={{textAlign: 'right', marginRight: '10px'}}>
+        <div style={{textAlign: 'right', marginRight: '40px'}}>
           Welcome back, {userInfo.entityName}</div>
       <div>
           <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>

@@ -16,6 +16,11 @@ const initialState = Immutable.Map({
   username: localStorage.username,
   password: localStorage.password,
   admin,
+  data: {
+    entityType: 1,
+    farmerType: 1,
+    entityName: localStorage.username
+  }
 });
 
 ///////////////////////////
