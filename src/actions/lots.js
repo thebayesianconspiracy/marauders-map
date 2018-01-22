@@ -1,6 +1,7 @@
 import utils from './utils';
 import { Router, Route, browserHistory, Link } from 'react-router';
 import async from 'async';
+import _ from 'lodash';
 
 const entityTypeEnums = {
   NULL: 0,
@@ -31,6 +32,21 @@ const lotStateEnums = {
 
 window.logout = function() {
   delete localStorage.username;
+}
+
+export function addLotsHack({ location }) {
+  return (dispatch, getState) => {
+    const data = [{
+      location,
+      created: Date.now(),
+      id: _.random(0, 100000),
+      status: 'created'
+    }];
+    dispatch({
+      type: 'ADD_LOTS',
+      payload: { data },
+    });
+  }
 }
 
 export function getLots(query) {

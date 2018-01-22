@@ -12,33 +12,44 @@ try {
 ////////////////////////
 ///// INITIAL STATE ////
 ////////////////////////
-const initialState = Immutable.Map({
-  username: localStorage.username,
-  password: localStorage.password,
-  admin,
-  data: {
-    entityType: 1,
-    farmerType: 1,
-    entityName: localStorage.username
-  },
-  bids: [
-    {
-      created: 1516642451312 - 3 * 86400 * 1000,
-      price: 100,
-      lotId: 1,
+
+
+let initialStateTemp = {};
+
+try {
+  initialStateTemp = JSON.parse(localStorage.login);
+} catch(e) {
+  console.log('parsing error is', e);
+  initialStateTemp = {
+    username: localStorage.username,
+    password: localStorage.password,
+    admin,
+    data: {
+      entityType: 1,
+      farmerType: 1,
+      entityName: localStorage.username
     },
-    {
-      created: 1516642421312 - 7 * 86400 * 1000,
-      price: 300,
-      lotId: 2,
-    },
-    {
-      created: 1516642151312 - 12 * 86400 * 1000,
-      price: 200,
-      lotId: 3,
-    },
-  ]
-});
+    bids: [
+      {
+        created: 1516642451312 - 3 * 86400 * 1000,
+        price: 100,
+        lotId: _.random(0, 10000),
+      },
+      {
+        created: 1516642421312 - 7 * 86400 * 1000,
+        price: 300,
+        lotId: _.random(0, 10000),
+      },
+      {
+        created: 1516642151312 - 12 * 86400 * 1000,
+        price: 200,
+        lotId: _.random(0, 10000),
+      },
+    ]
+  };
+}
+
+const initialState = Immutable.Map(initialStateTemp);
 
 ///////////////////////////
 /// ACTION-REDUCER MAP ////
@@ -52,9 +63,16 @@ export const REDUCERS = {
 //////////////////////////
 ///// EXPORT REDUCER /////
 //////////////////////////
-export default (state = initialState, action = {}) => {
+const reducer = (state = initialState, action = {}) => {
   const { type } = action;
   if (REDUCERS[type])
     return REDUCERS[type](state, action.payload);
   return state;
 };
+
+
+export default (state = initialState, action = {}) => {
+  const newState = reducer(state, action);
+  localStorage.login = JSON.stringify(newState.toJS())
+  return newState;
+}

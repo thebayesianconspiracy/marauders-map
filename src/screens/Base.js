@@ -166,7 +166,7 @@ class Base extends React.Component {
           <th style={tableStyle}>Add Lots</th>
           <th style={tableStyle}>Location</th>
           <th style={tableStyle}>Date created</th>
-          <th style={tableStyle}>Bids Received</th>
+          <th style={tableStyle}>Status</th>
         </tr>
       )],
       _.map(lots, lot => (
@@ -178,7 +178,7 @@ class Base extends React.Component {
           </td>
           <td style={tableStyle}>{lot.location}</td>
           <td style={tableStyle}>{formatDate(new Date(lot.created))}</td>
-          <td style={tableStyle}>{lot.bids}</td>
+          <td style={tableStyle}>{lot.status}</td>
         </tr>
       ))
     );
@@ -205,6 +205,8 @@ class Base extends React.Component {
       borderCollapse: 'collapse',
     };
 
+    
+
     const sellModal = this.getModal(
       (
         <LocalForm
@@ -226,7 +228,7 @@ class Base extends React.Component {
       <div>
         <span onClick={this.toggle.bind(this, "showAddSale")} style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} >Add lots</span>
         <a  style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:7970">Farmer Intelligence</a>
-        <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/track">Track Order</Link>
+        <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/track">Sell Lots</Link>
       </div>
       <div style={{nav}}>
         {userDiv}
