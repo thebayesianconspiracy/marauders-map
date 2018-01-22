@@ -30,20 +30,26 @@ const lotStateEnums = {
 
 window.logout = function() {
   delete localStorage.username;
+  browserHistory.replace("/")
 }
 
 export function login({ username, password, entityType, farmerType }) {
   return async function (dispatch, getState) {
     try {
-      const admin = await utils.signUp(username, password);
-      console.log('admin is', admin);
-      const contract = await utils.triggerContract(admin, 'EntityManager', 'createEntity', {
-        entityName: admin.name,
-        pwHash: admin.password,
-        entityType: entityTypeEnums[entityType] || 0,
-        farmerType: farmerTypeEnums[farmerType] || 0
-      });
-      console.log('response is', contract);
+      /* const admin = await utils.signUp(username, password);
+       * console.log('admin is', admin);
+       * const contract = await utils.triggerContract(admin, 'EntityManager', 'createEntity', {
+       *   entityName: admin.name,
+       *   pwHash: admin.password,
+       *   entityType: entityTypeEnums[entityType] || 0,
+       *   farmerType: farmerTypeEnums[farmerType] || 0
+       * });
+       * console.log('response is', contract);*/
+      const admin = {
+        name: username,
+        password,
+        address: 'wlkejrslkcvjs',
+      };
       localStorage.username = username;
       localStorage.password = password;
       localStorage.admin = JSON.stringify(admin);
