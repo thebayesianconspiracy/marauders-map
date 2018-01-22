@@ -6,6 +6,7 @@ import store from '../store';
 import history from '../history';
 import Signup from './Signup';
 import Base from './Base';
+import Retailer from './Retailer';
 import Track from './Track';
 import OrderTrackPage from './OrderTrackPage';
 import LotAdd from './LotAdd';
@@ -60,6 +61,7 @@ export default class Root extends React.Component {
       <Router history={history}>
         <Route path="/login" component={Signup} />
         <Route path="/track" component={Track} />
+        <Route path="/retailer" component={Retailer} />
         <Route path="/ordertrack" component={OrderTrackPage} />
         <Route component={EnsureLoggedInContainer}>
           <Route path="/" component={Base} />
