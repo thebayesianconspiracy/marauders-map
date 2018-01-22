@@ -100,11 +100,10 @@ class Base extends React.Component {
       </div>
     );
 
-
     const lotData = _.map(lots, lot => (
-      <div>
-        Lot location: {lot.location}, date: {formatDate(new Date(lot.created))}
-      </div>
+      <tr>
+        <td style={{borderWidth: '1px', border: 'solid', padding: '5px'}}>Lot location: {lot.location}, date: {formatDate(new Date(lot.created))}</td>
+      </tr>
     ));
     return (
       <div style={rootStyle}>
@@ -121,7 +120,9 @@ class Base extends React.Component {
         <div style={lotRoot}>
           <h2>List of Lots</h2>
           <div style={lotDataStyle}>
+          <table>
             {lotData}
+          </table>
           </div>
           <div style={Object.assign({}, userinfoStyle)}>
           </div>
