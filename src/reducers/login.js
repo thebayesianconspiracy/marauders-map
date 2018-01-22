@@ -20,7 +20,24 @@ const initialState = Immutable.Map({
     entityType: 1,
     farmerType: 1,
     entityName: localStorage.username
-  }
+  },
+  bids: [
+    {
+      created: 1516642451312 - 3 * 86400 * 1000,
+      price: 100,
+      lotId: 1,
+    },
+    {
+      created: 1516642421312 - 7 * 86400 * 1000,
+      price: 300,
+      lotId: 2,
+    },
+    {
+      created: 1516642151312 - 12 * 86400 * 1000,
+      price: 200,
+      lotId: 3,
+    },
+  ]
 });
 
 ///////////////////////////

@@ -10,16 +10,19 @@ const initialState = Immutable.Map({
       created: 1516642451312 - 5 * 86400 * 1000,
       location: 'Rajasthan',
       bids: 5,
+      id: 1,
     },
     {
       created: 1516642421312 - 10 * 86400 * 1000,
       location: 'Jammu',
       bids: 3,
+      id: 2,
     },
     {
       created: 1516642151312 - 17 * 86400 * 1000,
       location: 'Sri Lanka',
       bids: 2,
+      id: 3,
     },
   ]
 });

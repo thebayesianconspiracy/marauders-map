@@ -67,17 +67,27 @@ class Base extends React.Component {
 
   constructor(props) {
     super(props);
+    this.values = {};
   }
 
   componentDidMount() {
     
   }
 
+  handleInputChangeLot(lot) {
+    console.log(lot);
+    if (this.values[lot.id]) {
+      delete this.values[lot.id];
+    } else {
+      this.values[lot.id] = lot;
+    }
+    console.log(this.values);
+  }
+
   render() {
     const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
     const bids = this.props.login.get('bids') || [];
-    console.log('bids are', bids);
     const textStyle = {
       position: 'relative',
       top: '15px',
@@ -98,6 +108,7 @@ class Base extends React.Component {
     const lotData = _.concat(
       [(
         <tr>
+          <th style={tableStyle}>Add Lots</th>
           <th style={tableStyle}>Location</th>
           <th style={tableStyle}>Date created</th>
           <th style={tableStyle}>Bids Received</th>
@@ -105,12 +116,40 @@ class Base extends React.Component {
       )],
       _.map(lots, lot => (
         <tr>
+          <td style={tableStyle}>
+            <input
+                type="checkbox"
+                onChange={this.handleInputChangeLot.bind(this, lot)} />
+          </td>
           <td style={tableStyle}>{lot.location}</td>
           <td style={tableStyle}>{formatDate(new Date(lot.created))}</td>
           <td style={tableStyle}>{lot.bids}</td>
         </tr>
       ))
     );
+
+    const bidData = _.concat(
+      [(
+        <tr>
+          <th style={tableStyle}>Lot Id</th>
+          <th style={tableStyle}>Date received</th>
+          <th style={tableStyle}>Price</th>
+        </tr>
+      )],
+      _.map(bids, bid => (
+        <tr>
+          <td style={tableStyle}>{bid.lotId}</td>
+          <td style={tableStyle}>{formatDate(new Date(bid.created))}</td>
+          <td style={tableStyle}>{bid.price} Rs</td>
+        </tr>
+      ))
+    );
+
+    const tableRootStyle = {
+      width: '800px',
+      borderCollapse: 'collapse',
+    };
+    
     return (
       <div style={rootStyle}>
         <div style={{textAlign: 'right', marginRight: '40px'}}>
@@ -124,12 +163,21 @@ class Base extends React.Component {
           {userDiv}
         </div>
         <div style={lotRoot}>
+          
           <h2>List of Lots</h2>
           <div style={lotDataStyle}>
-          <table>
-            {lotData}
-          </table>
+            <table style={tableRootStyle}>
+              {lotData}
+            </table>
           </div>
+
+          <h2>List of Bids</h2>
+          <div style={lotDataStyle}>
+            <table style={tableRootStyle}>
+              {bidData}
+            </table>
+          </div>
+          
           <div style={Object.assign({}, userinfoStyle)}>
           </div>
         </div>
