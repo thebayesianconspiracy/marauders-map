@@ -41,11 +41,26 @@ const nav = {
 }
 
 const entityTypeImages = {
-  1: "https://image.ibb.co/etf28b/organic.png",
+  1: "https://image.ibb.co/j7UvTb/farmer1.png",
 }
 
 const farmerTypeImages = {
-  1: "https://image.ibb.co/j7UvTb/farmer1.png",
+  1: "https://image.ibb.co/etf28b/organic.png",
+}
+
+function formatDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
 
 class Base extends React.Component {
@@ -87,7 +102,7 @@ class Base extends React.Component {
 
     const lotData = _.map(lots, lot => (
       <tr>
-        <td style={{borderWidth: '1px', border: 'solid', padding: '5px'}}>Lot location: {lot.location}, date: {_.toString(new Date(lot.created))}</td>
+        <td style={{borderWidth: '1px', border: 'solid', padding: '5px'}}>Lot location: {lot.location}, date: {formatDate(new Date(lot.created))}</td>
       </tr>
     ));
     return (
@@ -96,7 +111,7 @@ class Base extends React.Component {
           Welcome back, {userInfo.entityName}</div>
       <div>
           <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addlots">Add lots</Link>
-          <a style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://192.168.0.161:5609">Farmer Intelligence</a>
+          <a style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} href="http://127.0.0.1:5609">Farmer Intelligence</a>
           <Link style={{marginBottom: '10px', display: 'block', color: 'white', marginLeft: 20, background: '#333333', padding: '10px', width: 200, borderRadius: 5, textAlign: 'center', fontSize: '20px', textDecoration: 'none'}} to="/addbids">Add bids</Link>
         </div>
         <div style={{nav}}>
