@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { LocalForm, Control } from 'react-redux-form';
 import _ from 'lodash';
-import { browserHistory } from 'react-router';
 
 import { addLots } from '../actions/lots';
 
 const formRoot = {
-  'flexDirection': "column",
+  'flexDirection': "row",
   'justify-content': "center",
   'alignItems': "center",
   display: "flex"
@@ -44,7 +43,7 @@ class Base extends React.Component {
   }
   
   handleSubmit(values) {
-    browserHistory.replace("/ordertrack");
+
   }
 
   componentDidMount() {
@@ -53,18 +52,7 @@ class Base extends React.Component {
   render() {
     return (
       <div style={formRoot}>
-        <span style={{ fontSize: 20, marginBottom: 10 }}>
-          Enter Order No:
-        </span>
-        <LocalForm
-            style={form}
-            onUpdate={(form) => this.handleUpdate(form)}
-            onChange={(values) => this.handleChange(values)}
-            onSubmit={(values) => this.handleSubmit(values)}
-        >
-          <Control.text value="12462947599" style={inputStyle} placeholder="Order Number" model=".num" />
-          <button style={inputStyle}>Submit</button>
-        </LocalForm>
+        <img src="https://preview.ibb.co/jXzfyb/screen.jpg" />
       </div>
     )
   }
