@@ -3,11 +3,36 @@ import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import _ from 'lodash';
 import Modal from 'react-modal';
+import { LocalForm, Control } from 'react-redux-form';
 
 import utils from '../actions/utils';
 
 import { getLots } from '../actions/lots';
 import { getBids } from '../actions/bids';
+
+
+const formRoot = {
+  'flexDirection': "row",
+  'justify-content': "center",
+  'alignItems': "center",
+  display: "flex"
+};
+
+const inputStyle = {
+  width: '340px',
+  height: '30px',
+  'border-radius': '6px',
+  margin: '8px',
+  'font-size': '18px'
+};
+
+const form = {
+  'borderWidth': 1,
+  'flexDirection': "column",
+  'justify-content': "center",
+  'alignItems': "center",
+  display: "flex"
+};
 
 
 const userinfoStyle = {
@@ -109,6 +134,10 @@ class Base extends React.Component {
     console.log(this.values);
   }
 
+  handleSubmitSale(values) {
+    console.log('sale', values);
+  }
+
   render() {
     const userInfo = this.props.login.toJS().data || {};
     const lots = this.props.lots.get('lots');
@@ -177,7 +206,13 @@ class Base extends React.Component {
 
     const sellModal = this.getModal(
       (
-        <span>Add Lot for Sale</span>
+        <LocalForm
+            style={form}
+            onSubmit={(values) => this.handleSubmitSale(values)}
+        >
+          <Control.text style={inputStyle} placeholder="Amount" model=".amount" />
+          <button style={inputStyle} >Submit</button>
+        </LocalForm>
       ),
       "showAddSale"
     );
